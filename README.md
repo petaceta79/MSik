@@ -4,11 +4,16 @@ Un reproductor de música local, el cual permite crear playlists y descargar aud
 
 ## 🧭 Contenidos
 
+- [Objetivos](#Objetivos) 
 - [Descripción](#descripción)  
 - [Características](#características)  
 - [Instalación](#instalación)  
 - [Tecnologías](#tecnologías) 
 - [Créditos](#créditos)
+
+## Objetivos
+
+El objetivo es actualizar mucho más esta app y llegar a publicarla en alguna plataforma.
 
 ## Descripción
 
@@ -20,7 +25,7 @@ Durante la reproducción, ofrece las funciones básicas de cualquier reproductor
 
 ## Instalación
 
-El proyecto se puede abrir desde el IDE preferido tal como vscode o android studio. En caso de querer isntalar la app, la apk esta dentro del proyecto en la carpeta release
+El proyecto se puede abrir desde el IDE preferido tal como vscode o android studio. En caso de querer isntalar la app, la apk esta dentro del proyecto en la carpeta release, en un rar por el tamaño.
 
 ## Tecnologías
 
