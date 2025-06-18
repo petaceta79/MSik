@@ -25,7 +25,7 @@ Durante la reproducción, ofrece las funciones básicas de cualquier reproductor
 
 ## Instalación
 
-El proyecto se puede abrir desde el IDE preferido tal como vscode o android studio. En caso de querer isntalar la app, la apk esta dentro del proyecto en la carpeta release, en un rar por el tamaño.
+El proyecto puede abrirse desde el IDE preferido, como VSCode o Android Studio. En caso de querer instalar la app, está planeado poner el archivo APK disponible en alguna plataforma de distribución una vez esté finalizada.
 
 ## Tecnologías
 
@@ -54,10 +54,6 @@ El proyecto está desarrollado usando las siguientes tecnologías y herramientas
 
 #### UI
 - `cupertino_icons` (^1.0.8) - Iconos estilo iOS
-
-### Notas
-- Todas las dependencias usan la última versión estable al momento de desarrollo
-- Algunas dependencias como `ffmpeg_kit_flutter_new` requieren configuración adicional para iOS/Android
 
 ## Créditos
 
