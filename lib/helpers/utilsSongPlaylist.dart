@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Sistema de prefijos para coexistir:
 // Canciones song_...
 // Playlist playlist_...
+// Info playlists recurrentes ultPlaylist_
+// Info canciones recurrentes ultCanciones_
 
 
 
@@ -396,3 +398,132 @@ Future<void> removeSongFromAllPlaylists(String songName) async {
   }
 }
 
+
+
+// Info playlists recurrentes
+// Devuelve una lista con las ultimas playlists escuchadas, sino ''
+Future<List<String>> utlimasplaylistEscuchadas() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  if (!prefs.containsKey("ultPlaylist_")) {
+    return ['', ''];
+  }
+
+  List<String> list = prefs.getStringList("ultPlaylist_")!;
+
+  while (list.length < 2) {
+    list.add('');
+  }
+
+  return list;
+}
+
+// Añade cancion a la lista de ultimas escuchadas
+void anyadirUltimaPlaylistsEscuchada(String name) async {
+  final prefs = await SharedPreferences.getInstance();
+
+  if (!prefs.containsKey("ultPlaylist_")) {
+    prefs.setStringList("ultPlaylist_", [name]);
+    return;
+  }
+
+  List<String> list = prefs.getStringList("ultPlaylist_")!;
+
+  if (list.contains(name)) return;
+
+  if (list.length == 2) {
+    list[0] = list[1];
+    list[1] = name;
+  }
+  else if (list.length > 2) {
+    while (list.length > 2) {
+      list.removeLast();
+    }
+  }
+  else {
+    list.add(name);
+  }
+
+  prefs.setStringList("ultPlaylist_", list);
+}
+
+void reiniciarUltimaPlaylists() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  prefs.remove("ultPlaylist_");
+}
+
+
+
+// Info canciones mas escuchadas
+// Devuelve todas las canciones que se han escuchado minimo una vez
+Future<List<String>> cancionesEscuchadasMinimo1() async {
+  final prefs = await SharedPreferences.getInstance();
+  final keys = prefs.getKeys();
+  final songNames = <String>[];
+
+  for (var key in keys) {
+    if (key.startsWith('ultCanciones_')) {
+      final name = key.substring(13); // Quita el prefijo "song_"
+      songNames.add(name);
+    }
+  }
+
+  return songNames;
+}
+
+Future<List<String>> DosCancionesMasEscuchadas() async {
+  final prefs = await SharedPreferences.getInstance();
+  List<String> songs = await cancionesEscuchadasMinimo1();
+
+  String song1 = '';
+  String song2 = '';
+  int song1Lis = 0;
+  int song2Lis = 0;
+
+  for (var song in songs) {
+    final key = 'ultCanciones_$song';
+    int value = prefs.getInt(key)!;
+
+    if (song1Lis < value) {
+      if (song1Lis != 0) {
+        song2 = song1;
+        song2Lis = song1Lis;
+      }
+      song1 = song;
+      song1Lis = value;
+    } else if (song2Lis < value) {
+      song2 = song;
+      song2Lis = value;
+    }
+  }
+
+  return [song1, song1Lis.toString(), song2, song2Lis.toString()];
+}
+
+// Suma una reproduccion a la cancion
+void sumarReproduccionCancion(String songName) async {
+  final prefs = await SharedPreferences.getInstance();
+  final key = 'ultCanciones_$songName';
+
+  if (!prefs.containsKey(key)) {
+    prefs.setInt(key, 1);
+    return;
+  }
+
+  int value = prefs.getInt(key)!;
+  value++;
+
+  prefs.setInt(key, value);
+}
+
+void reiniciarCancionesMasEscuchadas() async {
+  final prefs = await SharedPreferences.getInstance();
+  final keys = prefs.getKeys();
+
+  for (final key in keys) {
+    if (key.startsWith('ultCanciones_')) {
+      await prefs.remove(key);
+    }
+  }
+}

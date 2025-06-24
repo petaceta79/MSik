@@ -20,6 +20,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   youtube_explode_dart: ^2.4.2
   ffmpeg_kit_flutter_new: ^2.0.0
+  font_awesome_flutter: ^10.8.0
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

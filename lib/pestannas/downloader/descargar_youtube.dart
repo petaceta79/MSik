@@ -4,6 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import '../../helpers/utilsSongPlaylist.dart';
 import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DescargaAudioYoutube extends StatefulWidget {
   @override
@@ -142,43 +143,127 @@ class _DescargaAudioYoutubeState extends State<DescargaAudioYoutube> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Descargar audio de YouTube')),
+      backgroundColor: Color(0xFF4A4A4A),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF4A4A4A),
+        centerTitle: true,
+        title: Text(
+          'Descargar de youtube',
+          style: TextStyle(
+            fontSize: 24.sp, // ← adaptado
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w), // ← adaptado
         child: Column(
           children: [
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                labelText: 'Pega el enlace o ID del video',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: !_descargando ? () => _descargarAudio(_controller.text) : null,
-              child: _descargando
-                  ? CircularProgressIndicator(color: Colors.white)
-                  : Text('Descargar audio'),
-            ),
-            Divider(height: 40),
-            TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Buscar por título o artista',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: !_descargando ? _buscarYMostrarResultados : null,
-              child: _descargando
-                  ? CircularProgressIndicator(color: Colors.white)
-                  : Text('Buscar y descargar'),
-            ),
-            SizedBox(height: 20),
-            Text(_mensaje),
+            Divider(color: Colors.orange, thickness: 2.h), // ← adaptado
+            SizedBox(height: 20.h),
+            UrlSearcher(),
+            SizedBox(height: 12.h),
+            UrlBotton(),
+            SizedBox(height: 12.h),
+            TitleSearcher(),
+            SizedBox(height: 12.h),
+            TitleBotton(),
+            SizedBox(height: 20.h),
+            Divider(color: Colors.orange, thickness: 2.h),
+            SizedBox(height: 20.h),
+            TextoResult(),
           ],
+        ),
+      ),
+    );
+  }
+
+  Container TextoResult() {
+    if (_mensaje == null || _mensaje.isEmpty) {
+      return Container(); // No ocupa espacio ni se ve
+    }
+
+    return Container(
+      padding: EdgeInsets.all(8.w), // ← adaptado
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular(8.r), // ← adaptado
+      ),
+      child: Text(
+        _mensaje,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 18.sp, // ← adaptado
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton TitleBotton() {
+    return ElevatedButton(
+      onPressed: !_descargando ? _buscarYMostrarResultados : null,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFFC64820),
+        foregroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.r), // ← adaptado
+        ),
+      ),
+      child: _descargando
+          ? CircularProgressIndicator(color: Colors.white)
+          : Icon(Icons.cloud_download, size: 25.sp), // ← adaptado
+    );
+  }
+
+  TextField TitleSearcher() {
+    return TextField(
+      controller: _searchController,
+      style: TextStyle(fontSize: 16.sp), // ← adaptado
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.orange,
+        hintText: 'Buscar por título o artista',
+        hintStyle: TextStyle(fontSize: 16.sp), // ← adaptado
+        prefixIcon: Icon(Icons.search, size: 24.sp), // ← adaptado
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r), // ← adaptado
+        ),
+      ),
+    );
+  }
+
+  ElevatedButton UrlBotton() {
+    return ElevatedButton(
+      onPressed: !_descargando ? () => _descargarAudio(_controller.text) : null,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFFC64820),
+        foregroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.r), // ← adaptado
+        ),
+      ),
+      child: _descargando
+          ? SizedBox(
+        height: 20.sp,
+        width: 20.sp,
+        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.sp),
+      )
+          : Icon(Icons.cloud_download, size: 25.sp), // ← adaptado
+    );
+  }
+
+  TextField UrlSearcher() {
+    return TextField(
+      controller: _controller,
+      style: TextStyle(fontSize: 16.sp), // ← texto adaptado
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.orange,
+        hintText: 'Pega la URL del video',
+        hintStyle: TextStyle(fontSize: 16.sp), // ← hint adaptado
+        prefixIcon: Icon(Icons.search, size: 24.sp), // ← ícono adaptado
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r), // ← borde adaptado
         ),
       ),
     );
