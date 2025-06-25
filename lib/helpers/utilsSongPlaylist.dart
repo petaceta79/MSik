@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Canciones song_...
 // Playlist playlist_...
 // Info playlists recurrentes ultPlaylist_
-// Info canciones recurrentes ultCanciones_
+// Info canciones recurrentes ultCanciones_ ultCancionesEpoch_
 
 
 
@@ -398,6 +398,48 @@ Future<void> removeSongFromAllPlaylists(String songName) async {
   }
 }
 
+// Mueve la posicion de la cancion hacia el inicio
+Future<void> moveToInicio(String playlistName, String songName) async {
+  final prefs = await SharedPreferences.getInstance();
+  String key = "playlist_$playlistName";
+
+  if (!prefs.containsKey(key)) { return;}
+
+  List<String> playlist = prefs.getStringList(key)!;
+
+  if (!playlist.contains(songName)) { return;}
+
+  int indiceSong = playlist.indexOf(songName);
+
+  if (indiceSong == 0) { return;}
+
+  playlist[indiceSong] = playlist[indiceSong-1];
+  playlist[indiceSong-1] = songName;
+
+  await prefs.setStringList(key, playlist);
+}
+
+// Mueve la posicion de la cancion hacia el final
+Future<void> moveToFinal(String playlistName, String songName) async {
+  final prefs = await SharedPreferences.getInstance();
+  String key = "playlist_$playlistName";
+
+  if (!prefs.containsKey(key)) { return;}
+
+  List<String> playlist = prefs.getStringList(key)!;
+
+  if (!playlist.contains(songName)) { return;}
+
+  int indiceSong = playlist.indexOf(songName);
+
+  if (indiceSong == (playlist.length - 1)) { return;}
+
+  playlist[indiceSong] = playlist[indiceSong+1];
+  playlist[indiceSong+1] = songName;
+
+  await prefs.setStringList(key, playlist);
+}
+
 
 
 // Info playlists recurrentes
@@ -525,5 +567,25 @@ void reiniciarCancionesMasEscuchadas() async {
     if (key.startsWith('ultCanciones_')) {
       await prefs.remove(key);
     }
+  }
+}
+
+Future<void> reiniciarCancionesMasEscuchadasCadaSemana() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  int epochMilisegundos = DateTime.now().millisecondsSinceEpoch;
+  int epochSemanas = epochMilisegundos ~/ 604800000;
+
+  if (!prefs.containsKey('ultCancionesEpoch_')) {
+    reiniciarCancionesMasEscuchadas();
+    await prefs.setInt('ultCancionesEpoch_', epochSemanas);
+    return;
+  }
+
+  int epochSemanaAnterior = await prefs.getInt('ultCancionesEpoch_')!;
+
+  if (epochSemanaAnterior != epochSemanas) {
+    reiniciarCancionesMasEscuchadas();
+    await prefs.setInt('ultCancionesEpoch_', epochSemanas);
   }
 }

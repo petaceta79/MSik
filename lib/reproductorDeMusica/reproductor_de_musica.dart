@@ -65,7 +65,7 @@ class _ReproductorDeMusicaState extends State<ReproductorDeMusica> {
 
             Divider(
               thickness: 1,
-              color: Colors.grey[300],
+              color: Colors.black,
               height: 16.h, // altura adaptativa
             ),
 
@@ -82,7 +82,7 @@ class _ReproductorDeMusicaState extends State<ReproductorDeMusica> {
       margin: EdgeInsets.all(4.w), // Espacio externo adaptado
       padding: EdgeInsets.all(12.w), // Espacio interno adaptado
       decoration: BoxDecoration(
-        color: Colors.grey[300], // Fondo gris claro
+        color: Colors.orange[200], // Fondo gris claro
         borderRadius: BorderRadius.circular(16.r), // Bordes redondeados adaptados
         boxShadow: [
           BoxShadow(
@@ -120,7 +120,7 @@ class CurrentSongTitle extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 30.sp, // tamaño adaptado
-              color: Colors.grey[300],
+              color: Colors.orange[500],
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -197,10 +197,10 @@ class AudioProgressBar extends StatelessWidget {
             buffered: value.buffered,
             total: value.total,
             onSeek: pageManager.seek,
-            progressBarColor: Colors.orange,         // Color de la barra de progreso
-            bufferedBarColor: Colors.orange.shade200, // Color de la barra buffer
+            progressBarColor: Colors.black,         // Color de la barra de progreso
+            bufferedBarColor: Colors.grey.shade200, // Color de la barra buffer
             baseBarColor: Colors.grey.shade300,      // Color de la barra base (fondo)
-            thumbColor: Colors.orange,                // Color del thumb (círculo que se mueve)
+            thumbColor: Colors.black,                // Color del thumb (círculo que se mueve)
             // si ProgressBar tuviera texto, aquí podrías usar fontSize: 16.sp por ejemplo
           ),
         );

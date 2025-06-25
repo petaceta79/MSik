@@ -132,3 +132,17 @@ Future<void> corregirCanciones() async {
     }
   }
 }
+
+// Borra todo
+Future<void> borraTodo() async {
+  // Paso 1: Borrar todos los archivos dentro de /songs
+  final paths = await obtenerPathsCanciones();
+  for (final path in paths) {
+    final file = File(path);
+    if (await file.exists()) {
+      await file.delete();
+    }
+  }
+
+  deleteAllKeys();
+}

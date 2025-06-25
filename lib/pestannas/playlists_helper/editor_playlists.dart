@@ -162,27 +162,11 @@ class _EditorPlaylistState extends State<EditorPlaylist> {
                 Row(
                   children: [
                     SizedBox(width: 8.w),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFC64820),
-                        foregroundColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 8.h,
-                        ),
-                      ),
-                      onPressed: () async {
-                        await removeSongFromPlaylist(
-                          widget.playlistName,
-                          songName,
-                        );
-                        await cargarCancionesDePlaylist();
-                      },
-                      child: Icon(Icons.delete, size: 20.sp),
-                    ),
+                    deleteButton(songName),
+                    SizedBox(width: 12.w),
+                    upButton(songName),
+                    SizedBox(width: 4.w),
+                    downButton(songName),
                   ],
                 ),
               ],
@@ -190,6 +174,78 @@ class _EditorPlaylistState extends State<EditorPlaylist> {
           ),
         ],
       ),
+    );
+  }
+
+  ElevatedButton deleteButton(String songName) {
+    return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFC64820),
+                      foregroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 8.h,
+                      ),
+                    ),
+                    onPressed: () async {
+                      await removeSongFromPlaylist(
+                        widget.playlistName,
+                        songName,
+                      );
+                      await cargarCancionesDePlaylist();
+                    },
+                    child: Icon(Icons.delete, size: 20.sp),
+                  );
+  }
+
+  ElevatedButton upButton(String songName) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFFC64820),
+        foregroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.w,
+          vertical: 8.h,
+        ),
+      ),
+      onPressed: () async {
+        await moveToInicio(
+          widget.playlistName,
+          songName,
+        );
+        await cargarCancionesDePlaylist();
+      },
+      child: Icon(Icons.arrow_upward, size: 20.sp),
+    );
+  }
+
+  ElevatedButton downButton(String songName) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Color(0xFFC64820),
+        foregroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.r),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: 12.w,
+          vertical: 8.h,
+        ),
+      ),
+      onPressed: () async {
+        await moveToFinal(
+          widget.playlistName,
+          songName,
+        );
+        await cargarCancionesDePlaylist();
+      },
+      child: Icon(Icons.arrow_downward, size: 20.sp),
     );
   }
 
