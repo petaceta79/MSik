@@ -35,25 +35,26 @@ El proyecto está desarrollado usando las siguientes tecnologías y herramientas
 - **📱 Framework**: Flutter
 - **📦 Gestión de dependencias**: Pub
 
-### Dependencias principales
+### 📦 Dependencias principales
 
-#### Reproducción de Audio
-- `just_audio` (^0.10.4) - Reproductor de audio flexible
-- `audio_video_progress_bar` (^2.0.3) - Barra de progreso para medios
+#### 🔊 Reproducción de Audio
+- [`just_audio`](https://pub.dev/packages/just_audio) ^0.10.4 - Reproductor de audio flexible
+- [`audio_video_progress_bar`](https://pub.dev/packages/audio_video_progress_bar) ^2.0.3 - Barra de progreso interactiva
 
-#### Almacenamiento
-- `shared_preferences` (^2.5.3) - Almacenamiento persistente clave-valor
-- `path_provider` (^2.1.5) - Acceso a rutas del sistema
+#### 💾 Almacenamiento
+- [`shared_preferences`](https://pub.dev/packages/shared_preferences) ^2.5.3 - Almacenamiento clave-valor
+- [`path_provider`](https://pub.dev/packages/path_provider) ^2.1.5 - Acceso a rutas del sistema
 
-#### Multimedia
-- `file_picker` (^10.2.0) - Selección de archivos multimedia
-- `ffmpeg_kit_flutter_new` (^2.0.0) - Procesamiento avanzado de audio/video
+#### 📁 Multimedia
+- [`file_picker`](https://pub.dev/packages/file_picker) ^10.2.0 - Selección de archivos
+- [`ffmpeg_kit_flutter_new`](https://pub.dev/packages/ffmpeg_kit_flutter_new) ^2.0.0 - Procesamiento de audio/video
 
-#### Integraciones
-- `youtube_explode_dart` (^2.4.2) - Extracción de datos de YouTube
+#### 🌐 Integraciones
+- [`youtube_explode_dart`](https://pub.dev/packages/youtube_explode_dart) ^2.4.2 - Extracción de datos de YouTube
 
-#### UI
-- `cupertino_icons` (^1.0.8) - Iconos estilo iOS
+#### 🎨 UI
+- [`font_awesome_flutter`](https://pub.dev/packages/font_awesome_flutter) ^10.8.0 - Iconos profesionales
+- [`flutter_screenutil`](https://pub.dev/packages/flutter_screenutil) ^5.9.3 - Responsividad
 
 ## Créditos
 
