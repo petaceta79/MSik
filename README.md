@@ -31,9 +31,9 @@ El proyecto puede abrirse desde el IDE preferido, como VSCode o Android Studio. 
 
 El proyecto está desarrollado usando las siguientes tecnologías y herramientas:
 
-- ** Lenguaje**: Dart
-- ** Framework**: Flutter
-- ** Gestión de dependencias**: Pub
+- Lenguaje: Dart
+- Framework: Flutter
+- Gestión de dependencias: Pub
 
 ### Dependencias principales
 
